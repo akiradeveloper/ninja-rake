@@ -1,0 +1,11 @@
+
+rule 4bdc8d28-f3da-4b62-99e2-5b328d11d85d
+  command = gcc -c $in -o $out
+
+
+
+build a1 b1 c1: 4bdc8d28-f3da-4b62-99e2-5b328d11d85d d e | f
+
+
+
+build a2 b2 c2: 4bdc8d28-f3da-4b62-99e2-5b328d11d85d d e 
