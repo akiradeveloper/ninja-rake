@@ -27,7 +27,7 @@ build1 = Ninja::Build.new(
   Ninja::Target.new("a.o"),
   Ninja::Explicitly.new("a.c", "b.c"),
   Ninja::Implicitly.new("c.c"))
-build2 = (rule, ...)
+build2 = Ninja::Build.new(rule, ...)
 Ninja.end_of_ninja(build1, build2)  
 ```
 
