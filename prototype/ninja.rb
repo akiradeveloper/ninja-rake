@@ -10,19 +10,28 @@ module Ninja
   end
   
   class Rule
-    def initialize(rule_desc)
+    def initialize(rule_desc, depfile="")
       @rule_desc = rule_desc
+      @depfile = depfile
       @unique_name = Ninja.create_UUID
     end
   
     def unique_name
       @unique_name
     end
-    
+
+    def depfile_line
+      if @depfile == ""
+        ""
+      else
+        "  depfile = #{@depfile}\n"
+      end
+    end 
+
     def to_ninja_format
 """
 rule #{unique_name}
-  command = #{@rule_desc}
+#{depfile_line}  command = #{@rule_desc}
 """
     end
   
@@ -127,13 +136,13 @@ build #{@target.to_ninja_format}: #{@rule.name} #{@explicit_dep.to_ninja_format}
   def Ninja.make_ninja_task(target) 
     namespace :ninja do
       namespace :build do
-        file target =>  DEFAULT_NINJA_FILENAME do 
+        task target =>  DEFAULT_NINJA_FILENAME do 
           sh "ninja #{target}"
         end
         task :all => target
       end
       namespace :clean do
-        file target => DEFAULT_NINJA_FILENAME do
+        task target => DEFAULT_NINJA_FILENAME do
           sh "ninja -t clean #{target}"
         end
         task :all => target
@@ -155,7 +164,7 @@ end # end of Ninja module
 if __FILE__ == $0
   puts Ninja::Rule.new("gcc -c $in -o $out").to_ninja_format
 
-  r1 =  Ninja::Rule.new("gcc -c $in -o $out")
+  r1 =  Ninja::Rule.new("gcc -MMD -MF $out.d -c $in -o $out", "$out.d")
   b1 = Ninja::Build.new(r1, Ninja::Target.new("a", ["b", "c"]), Ninja::Explicitly.new(["d"], "e"), Ninja::Implicitly.new("f"))
   b2 = Ninja::Build.new(r1, Ninja::Target.new("a", ["b", "c"]), Ninja::Explicitly.new(["d"], "e"))
   puts b1.to_ninja_format

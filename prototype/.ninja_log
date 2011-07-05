@@ -1,0 +1,7 @@
+# ninja log v2
+0 203 mylib.o gcc -lm -O3 -o mylib.o -c mylib.c
+0 81 mylib.o gcc -lm -O3 -o mylib.o -c mylib.c
+0 77 mylib.o gcc -lm -O3 -o mylib.o -c mylib.c
+0 32 mylib.o gcc -MMD -MF mylib.o.d -lm -O3 -o mylib.o -c mylib.c
+0 30 mylib.o gcc -MMD -MF mylib.o.d -lm -O3 -o mylib.o -c mylib.c
+0 77 mylib.o gcc -MMD -MF mylib.o.d -lm -O3 -o mylib.o -c mylib.c
