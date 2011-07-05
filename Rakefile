@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+load "git.rake"
+
 require 'rubygems'
 require 'bundler'
 begin
