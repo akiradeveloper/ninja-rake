@@ -7,7 +7,7 @@ you can not use typical data structures (for example array, map, set etc)
 and general algorithms (for example map, filter, sort etc) equipped with the modern scripting languages in your raw Ninja script.
 This makes Ninja hard to be deployed into your projects.
 
-This is the result of the developer of Ninja decided not to provide these functinalities to keep Ninja simple as possible
+This is the result of the developer of Ninja decided not to provide these functinalities to keep Ninja as simple as possible
 and let users (like you!) to generate Ninja file by your own scripting however,
 I believe there should be some de-facto standard for scripting and I again believe it is Ruby that I love the most.
 
@@ -19,20 +19,25 @@ the state of the art framework for describing daily tasks including building sof
 ## Install
 
 ## Usage
+
 ```ruby
+rule = Ninja::Rule.new("gcc -c $in -o $out"), # rule have unique ID.
 build1 = Ninja::Build.new(
-  Ninja::Rule.new("gcc -c $in -o $out"), 
+  rule,
   Ninja::Target.new("a.o"),
   Ninja::Explicitly.new("a.c", "b.c"),
   Ninja::Implicitly.new("c.c"))
-build2 = ...
+build2 = (rule, ...)
 Ninja.end_of_ninja(build1, build2)  
 ```
+
 will produce a Rake task that create "build.ninja" file that is written as
+
 ~~~
-rule xxx
+rule ID
   command = gcc -c $in -o $out
-build a.o: xxx a.c b.c | c.c
+build1 a.o: ID a.c b.c | c.c
+build2 ...: ID ...
 ~~~
 
 ## Roadmap
