@@ -1,1 +1,1 @@
-mylib.o: mylib.c mylib.h
+mylib: mylib.c mylib.h

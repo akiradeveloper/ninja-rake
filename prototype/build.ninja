@@ -1,21 +1,21 @@
 
-rule 62856af9-80ad-4718-bec9-549254ebf945
+rule cd4c3fff-3ff2-4245-961c-ed69375b637e
   command = gcc -c $in -o $out
 
 
 
-rule 00ed9d25-1527-4168-847f-ed182b68c18a
+rule 289fb23c-df8b-4ba4-baff-7c9b363b48f3
   depfile = $out.d
-  command = gcc -MMD -MF $out.d -lm -O3 -o $out -c $in
+  command = gcc -MMD $out.d -O3 -o $out $in -lm
 
 
 
-build a1 b1 c1: 62856af9-80ad-4718-bec9-549254ebf945 d e | f
+build a1 b1 c1: cd4c3fff-3ff2-4245-961c-ed69375b637e d e | f
 
 
 
-build a2 b2 c2: 62856af9-80ad-4718-bec9-549254ebf945 d e 
+build a2 b2 c2: cd4c3fff-3ff2-4245-961c-ed69375b637e d e 
 
 
 
-build mylib.o: 00ed9d25-1527-4168-847f-ed182b68c18a mylib.c 
+build mylib: 289fb23c-df8b-4ba4-baff-7c9b363b48f3 mylib.c 

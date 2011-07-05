@@ -5,3 +5,11 @@
 0 32 mylib.o gcc -MMD -MF mylib.o.d -lm -O3 -o mylib.o -c mylib.c
 0 30 mylib.o gcc -MMD -MF mylib.o.d -lm -O3 -o mylib.o -c mylib.c
 0 77 mylib.o gcc -MMD -MF mylib.o.d -lm -O3 -o mylib.o -c mylib.c
+0 256 mylib gcc -MMD -MF mylib.d -lm -O3 -o mylib -c mylib.c
+1 42 mylib gcc -MMD -MF mylib.d -lm -O3 -o mylib -c mylib.c
+0 39 mylib gcc -MMD -MF mylib.d -lm -O3 -o mylib -c mylib.c
+0 50 mylib gcc -MMD -MF mylib.d -O3 -o mylib -lm -c mylib.c
+0 45 mylib gcc -MMD -MF mylib.d -O3 -o mylib -c mylib.c -lm
+0 110 mylib gcc -MMD -MF mylib.d -O3 -o mylib mylib.c -lm
+0 93 mylib gcc -MMD -MF mylib.d -O3 -o mylib mylib.c -lm
+0 260 mylib gcc -MMD mylib.d -O3 -o mylib mylib.c -lm
