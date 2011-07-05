@@ -1,6 +1,7 @@
-#include "math.h"
+#include <stdio.h>
+#include <math.h>
+
 #include "mylib.h"
-#include "stdio.h"
 
 double mysqrt(double x)
 {

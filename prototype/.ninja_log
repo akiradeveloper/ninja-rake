@@ -13,3 +13,5 @@
 0 110 mylib gcc -MMD -MF mylib.d -O3 -o mylib mylib.c -lm
 0 93 mylib gcc -MMD -MF mylib.d -O3 -o mylib mylib.c -lm
 0 260 mylib gcc -MMD mylib.d -O3 -o mylib mylib.c -lm
+0 87 mylib gcc -MMD -MF mylib.d -O3 -o mylib mylib.c -lm
+0 84 mylib gcc -MMD -MF mylib.d -O3 -o mylib mylib.c -lm
