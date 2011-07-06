@@ -16,6 +16,12 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
+
+  # see https://github.com/technicalpickles/jeweler/blob/master/jeweler.gemspec for example
+  # if gem is a instance of Gem::Specification, we can include files by
+  # gem.files = [
+  # ]
+
   gem.name = "ninja-rake"
   gem.homepage = "http://github.com/akiradeveloper/ninja-rake"
   gem.license = "MIT"
