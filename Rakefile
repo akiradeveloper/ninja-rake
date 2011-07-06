@@ -1,7 +1,5 @@
 # encoding: utf-8
 
-p FileList["./**/*"]
-
 load "git.rake"
 
 require 'rubygems'
