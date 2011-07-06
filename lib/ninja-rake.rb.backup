@@ -1,0 +1,2 @@
+require "ninja"
+# raise "This file is dummy. Please require ninja.rb instead."

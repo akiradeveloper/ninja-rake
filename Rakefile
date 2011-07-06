@@ -19,8 +19,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "ninja-rake"
   gem.homepage = "http://github.com/akiradeveloper/ninja-rake"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Let your Ninja more powerful with Ruby}
+  gem.description = %Q{ninja-rake enables you to play Ninja on the Rake framework}
   gem.email = "ruby.wktk@gmail.com"
   gem.authors = ["Akira Hayakawa"]
   # dependencies defined in Gemfile

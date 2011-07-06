@@ -1,6 +1,4 @@
-require_relative "ninja"
-
-include Ninja
+require "ninja-rake"
 
 r1 = Ninja.Rule("gcc -c $in -o $out")
 b1 = Ninja.Build(r1, Ninja.Target("a1", ["b1", "c1"]), Ninja.Explicitly(["d"], "e"), Ninja.Implicitly("f"))

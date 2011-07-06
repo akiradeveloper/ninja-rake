@@ -9,6 +9,7 @@ GEM
     rake (0.8.7)
     rcov (0.9.9)
     shoulda (2.11.3)
+    uuidtools (2.1.2)
 
 PLATFORMS
   ruby
@@ -16,5 +17,7 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.0.0)
   jeweler (~> 1.6.3)
+  rake (>= 0.8.7)
   rcov
   shoulda
+  uuidtools (>= 2.1.2)

@@ -5,7 +5,7 @@ module Ninja
 
   DEFAULT_NINJA_FILENAME = "build.ninja"
   
-  def Ninja.create_UUID
+  def self.create_UUID
     UUIDTools::UUID.random_create
   end
   
@@ -106,21 +106,21 @@ build #{@target.to_ninja_format}: #{@rule.name} #{@explicit_dep.to_ninja_format}
     end
   end
   
-  def Ninja.__to_ninja_format(xs)
+  def self.__to_ninja_format(xs)
     xs.map{ |x| x.to_ninja_format }.join "\n\n"
   end
   
-  def Ninja.rules(ninjas)
+  def self.rules(ninjas)
     __rules = ninjas.map{ |x| x.get_rule_object } 
     Set.new(__rules).to_a
   end
   
-  def Ninja.to_ninja_format(ninjas)
+  def self.to_ninja_format(ninjas)
     xs = (rules(ninjas) + ninjas).flatten
     __to_ninja_format(xs)
   end
   
-  def Ninja.create_ninja_file(ninjas)
+  def self.create_ninja_file(ninjas)
     namespace :ninja do
       desc("generate ninja file if ninja.rake is changed")
       file DEFAULT_NINJA_FILENAME => "ninja.rake" do 
@@ -133,7 +133,7 @@ build #{@target.to_ninja_format}: #{@rule.name} #{@explicit_dep.to_ninja_format}
     end
   end
   
-  def Ninja.make_ninja_task(target) 
+  def self.make_ninja_task(target) 
     namespace :ninja do
       namespace :build do
         task target =>  DEFAULT_NINJA_FILENAME do 
@@ -150,7 +150,7 @@ build #{@target.to_ninja_format}: #{@rule.name} #{@explicit_dep.to_ninja_format}
     end
   end
   
-  def Ninja.end_of_ninja(*ninjas)
+  def self.end_of_ninja(*ninjas)
     create_ninja_file(ninjas.flatten)
 
     ninjas.each do |ninja|
@@ -159,14 +159,42 @@ build #{@target.to_ninja_format}: #{@rule.name} #{@explicit_dep.to_ninja_format}
       end
     end
   end
+
+  # Facade 
+  # To Hide the implementation 
+  def self.Rule(rule, depfile="") 
+    Ninja::Rule.new(rule, depfile)
+  end
+  
+  def self.Build(rule, target, explicit, implicit=nil)
+    Ninja::Build.new(rule, target, explicit, implicit)
+  end
+  
+  def self.Target(*xs)
+    Ninja::Target.new(xs)
+  end
+  
+  def self.Explicitly(*xs)
+    Ninja::Explicitly.new(xs)
+  end
+  
+  def self.Implicitly(*xs)
+    Ninja::Implicitly.new(xs)
+  end
+
 end # end of Ninja module
 
 if __FILE__ == $0
-  puts Ninja::Rule.new("gcc -c $in -o $out").to_ninja_format
+  puts Ninja.Rule("gcc -c $in -o $out").to_ninja_format
 
-  r1 =  Ninja::Rule.new("gcc -MMD -MF $out.d -c $in -o $out", "$out.d")
-  b1 = Ninja::Build.new(r1, Ninja::Target.new("a", ["b", "c"]), Ninja::Explicitly.new(["d"], "e"), Ninja::Implicitly.new("f"))
-  b2 = Ninja::Build.new(r1, Ninja::Target.new("a", ["b", "c"]), Ninja::Explicitly.new(["d"], "e"))
+  p Ninja.Rule("gcc -MMD -MF $out.d -c $in -o $out", "$out.d")
+  r1 =  Ninja.Rule("gcc -MMD -MF $out.d -c $in -o $out", "$out.d")
+  b0 = Ninja.Build(
+    r1,
+    Ninja.Target("a", ["b", "c"]),
+    Ninja.Explicitly(["d"], "e"), Ninja.Implicitly("f"))
+  b1 = Ninja.Build(r1, Ninja.Target("a", ["b", "c"]), Ninja.Explicitly(["d"], "e"), Ninja.Implicitly("f"))
+  b2 = Ninja.Build(r1, Ninja.Target("a", ["b", "c"]), Ninja.Explicitly(["d"], "e"))
   puts b1.to_ninja_format
   puts b2.to_ninja_format
   puts Ninja.rules([b1, b2])
