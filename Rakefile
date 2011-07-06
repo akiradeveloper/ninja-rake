@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+p FileList["./**/*"]
+
 load "git.rake"
 
 require 'rubygems'
@@ -19,8 +21,7 @@ Jeweler::Tasks.new do |gem|
 
   # see https://github.com/technicalpickles/jeweler/blob/master/jeweler.gemspec for example
   # if gem is a instance of Gem::Specification, we can include files by
-  # gem.files = [
-  # ]
+  gem.files = FileList["lib/**/*.rb"]
 
   gem.name = "ninja-rake"
   gem.homepage = "http://github.com/akiradeveloper/ninja-rake"

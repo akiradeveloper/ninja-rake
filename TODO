@@ -1,4 +1,2 @@
 # TODO
 
-* client should require "ninja" instead of "ninja-rake". 
-* lib/ninja-rake.rb can not require any .rb file below the /lib directory. For example, it can not require_relative "ninja" though ninja.rb file was right beside ninja-rake.rb.
