@@ -26,6 +26,7 @@ gem install ninja-rake
 ~~~
 
 To install ninja itself,
+
 * First git clone the ninja repository to any location in your computer.
 * install ninja ( just 'sh bootstrap.sh' ).
 * configure PATH variable so you can use ninja.
