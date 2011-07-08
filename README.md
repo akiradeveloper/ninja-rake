@@ -2,17 +2,17 @@
 Make your Ninja more powerful with the power of Ruby on Rake Framework!
 
 ## Motivation
-Ninja is a build tool brilliant ever however it lacks some paramount functionalities such as script descpriptiveness:
+Ninja(https://github.com/martine/ninja) is a build tool brilliant ever however it lacks some paramount functionalities such as script descpriptiveness:
 you can not use typical data structures (for example array, map, set etc) 
 and general algorithms (for example map, filter, sort etc) equipped with the modern scripting languages in your raw Ninja script.
 This makes Ninja hard to be deployed into your projects.
 
 This is the result of the developer of Ninja decided not to provide these functinalities to keep Ninja as simple as possible
-and let users (like you!) to generate Ninja file by your own scripting however,
-I believe there should be some de-facto standard for scripting and I again believe it is Ruby that I love the most.
+and fall back on users to generate Ninja file by your own scripting however,
+I believe there should be some de facto standard for scripting and I again believe it is Ruby that I love the most.
 
 Using this ninja-rake library you can write Ninja code with Ruby language which enables
-using plenty of data structures and algorithms in Ruby standard library.
+using plenty of data structures and algorithms provided in Ruby standard library.
 Moreover, your script can easily collaborate with Rake which is
 the state of the art framework for describing daily tasks including building softwares.
 
@@ -55,6 +55,8 @@ rule ID
 build1 a.o: ID a.c b.c | c.c
 build2 ...: ID ...
 ~~~
+
+For closer look into ninja-rake, see example. 
 
 ## Roadmap
 - Rule generator which enables to build GPGPU project written in CUDA 4.0.

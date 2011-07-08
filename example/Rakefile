@@ -1,0 +1,8 @@
+load "ninja.rake"
+
+desc("clean all the generated files.")
+task :clean do
+  rm "mylib"
+  rm "mylib.d"
+  rm "build.ninja"
+end
