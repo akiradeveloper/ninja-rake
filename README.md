@@ -3,8 +3,8 @@ Make your Ninja more powerful with the power of Ruby on Rake Framework!
 
 ## Motivation
 Ninja(https://github.com/martine/ninja) is a build tool brilliant ever however it lacks some paramount functionalities such as script descpriptiveness:
-you can not use typical data structures (for example array, map, set etc) 
-and general algorithms (for example map, filter, sort etc) equipped with the modern scripting languages in your raw Ninja script.
+you can not use typical data structures(for example array, map, set etc) 
+and general algorithms(for example map, filter, sort etc) equipped with the modern scripting languages in your raw Ninja script.
 This makes Ninja hard to be deployed into your projects.
 
 This is the result of the developer of Ninja decided not to provide these functinalities to keep Ninja as simple as possible

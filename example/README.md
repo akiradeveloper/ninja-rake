@@ -1,6 +1,7 @@
 # Description of this example
 
 These files are initially located in this example.
+
 - mylib.h # declares prototype of mysqrt
 - mylib.c # implements mysqrt function in mylib.h. includes mylib.h
 - Rakefile # only load ninja.rake
