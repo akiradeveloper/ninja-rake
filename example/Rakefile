@@ -5,4 +5,5 @@ task :clean do
   rm "mylib"
   rm "mylib.d"
   rm "build.ninja"
+  rm ".ninja_log"
 end
