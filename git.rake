@@ -1,4 +1,4 @@
-namespace :ninja_rake do
+namespace "ninja" do
   task :remote_add do
     sh "git remote add origin git@github.com:akiradeveloper/ninja-rake.git"
   end

@@ -1,0 +1,21 @@
+
+rule da5a9e64-80bd-466d-813f-8451da6e3097
+  command = gcc -c $in -o $out
+
+
+
+rule af26c54c-8848-475d-a4d1-d59c14e882d1
+  depfile = $out.d
+  command = gcc -MMD -MF $out.d -O3 -o $out $in -lm
+
+
+
+build a1 b1 c1: da5a9e64-80bd-466d-813f-8451da6e3097 d e | f
+
+
+
+build a2 b2 c2: da5a9e64-80bd-466d-813f-8451da6e3097 d e 
+
+
+
+build mylib: af26c54c-8848-475d-a4d1-d59c14e882d1 mylib.c 
