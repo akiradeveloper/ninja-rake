@@ -3,8 +3,6 @@ require "uuidtools"
 
 module Ninja
 
-  DEFAULT_NINJA_FILENAME = "build.ninja"
-  
   def self.create_UUID
     UUIDTools::UUID.random_create
   end
@@ -14,6 +12,11 @@ module Ninja
       @rule_desc = rule_desc
       @depfile = depfile
       @unique_name = Ninja.create_UUID
+    end
+
+    def with_name!(name)
+      @unique_name = name
+      self
     end
   
     def unique_name
@@ -119,46 +122,6 @@ build #{@target.to_ninja_format}: #{@rule.name} #{@explicit_dep.to_ninja_format}
     xs = (rules(ninjas) + ninjas).flatten
     __to_ninja_format(xs)
   end
-  
-  def self.create_ninja_file(ninjas)
-    namespace :ninja do
-      desc("generate ninja file if ninja.rake is changed")
-      file DEFAULT_NINJA_FILENAME => "ninja.rake" do 
-        puts "--- REGENERATING THE NINJA FILE NOW ---"
-        f = File.new(DEFAULT_NINJA_FILENAME, "w")
-	txt = to_ninja_format(ninjas)
-        f.write(txt)
-        f.close
-      end
-    end
-  end
-  
-  def self.make_ninja_task(target) 
-    namespace :ninja do
-      namespace :build do
-        task target =>  DEFAULT_NINJA_FILENAME do 
-          sh "ninja #{target}"
-        end
-        task :all => target
-      end
-      namespace :clean do
-        task target => DEFAULT_NINJA_FILENAME do
-          sh "ninja -t clean #{target}"
-        end
-        task :all => target
-      end 
-    end
-  end
-  
-  def self.end_of_ninja(*ninjas)
-    create_ninja_file(ninjas.flatten)
-
-    ninjas.each do |ninja|
-      ninja.get_target_object.to_a.each do |target|
-        make_ninja_task(target)
-      end
-    end
-  end
 
   # Facade 
   # To Hide the implementation 
@@ -182,20 +145,3 @@ build #{@target.to_ninja_format}: #{@rule.name} #{@explicit_dep.to_ninja_format}
     Ninja::Implicitly.new(xs)
   end
 end # end of Ninja module
-
-if __FILE__ == $0
-  puts Ninja.Rule("gcc -c $in -o $out").to_ninja_format
-
-  p Ninja.Rule("gcc -MMD -MF $out.d -c $in -o $out", "$out.d")
-  r1 =  Ninja.Rule("gcc -MMD -MF $out.d -c $in -o $out", "$out.d")
-  b0 = Ninja.Build(
-    r1,
-    Ninja.Target("a", ["b", "c"]),
-    Ninja.Explicitly(["d"], "e"), Ninja.Implicitly("f"))
-  b1 = Ninja.Build(r1, Ninja.Target("a", ["b", "c"]), Ninja.Explicitly(["d"], "e"), Ninja.Implicitly("f"))
-  b2 = Ninja.Build(r1, Ninja.Target("a", ["b", "c"]), Ninja.Explicitly(["d"], "e"))
-  puts b1.to_ninja_format
-  puts b2.to_ninja_format
-  puts Ninja.rules([b1, b2])
-  puts Ninja.to_ninja_format([b1, b2])
-end

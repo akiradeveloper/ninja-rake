@@ -1,5 +1,9 @@
 require 'helper'
 
+def checkshell(s)
+  
+end
+
 class TestNinjaRake < Test::Unit::TestCase
   # The Test is simple. If it doest raise error, it is OK.
   # It is better than nothing.
@@ -20,6 +24,12 @@ class TestNinjaRake < Test::Unit::TestCase
   end
 
   should "not raise error 2" do
-    `rake -P`
+    checkshell("rake -P")
   end
+
+  should "not raise error 3" do
+    checkshell("rake \"ninja build\"")
+  end
+
 end
+
